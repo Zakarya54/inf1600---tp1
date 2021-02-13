@@ -22,46 +22,53 @@ package acc_proc_programs is
 
    -- Programme utilise pour Q2
    constant program_1 : memtype := (
-      -- ajouter votre programme ici, une ligne par instruction         --  s(n+2) = 1 + s(n+1) + s(n)
-      to_uint16((ld,  22)),                 --1    ACC = 1                                
-      to_unit16((brz, 21)),                 --2   (ACC = 0) PC = address ( ....)          
-
-      to_uint16((ld,  22)),                 --1                                        
-      to_unit16((add, 23)),                 --3                                          
-      to_unit16((add, 24)),                 --4                                          
-      to_unit16((sti, 26)),                 --5                                          
-
-      to_uint16((ld,  25)),                 --1                                          
-      to_unit16((sub, 22)),                                                               
-      --decrementer compteur                --                                          
-      to_unit16((brz, 21)),                 --11   F (ACC = 0) PC = address (...)       
-      to_unit16((sti, 25)),                 --10
-
-      to_uint16((ld,  24)),                 --11
-      to_unit16((add, 22)),                 --12
-      to_unit16((add, 24))                  --13
-      to_unit16((sti, 24)),                 --14
-
-      to_uint16((ld,  25)),                 --15
-      to_unit16((sub, 22)),                 --16
-      --decrementer compteur                                                     
-      to_unit16((brz, 21)),                 --17   (ACC = 0) PC = address ( ....)        
-      to_unit16((sti, 25)),                 --18
-      to_unit16((br,  2)),                  --19
-
+      -- ajouter votre programme ici, une ligne par instruction
+      to_uint16((lda,29)),                                     --0    MA = Adresse de X             MA = 29
+      to_uint16((ldi,0)),                                      --1    ACC = contenu MA = [[29]]     ACC = s(0) = 1
+      to_uint16((adda,31)),                                    --2    MA = MA + 1                   MA = 30
+      to_uint16((addx,0)),                                     --3    ACC = ACC + s(1)              ACC = s(0) + s(1) = 1 + 2 = 3
+      to_uint16((add,31)),
+      to_uint16((adda,31)),                                    --4    MA = MA + 1                   MA = 30 +1 = 31       
+      to_uint16((sti,0)),                                      --5    [[MA]] = ACC         
       
+      to_uint16((suba,31)),                                   --6   MA = MA - 1
 
-      
-      to_uint16((stop, 0)),                  --20
-      to_uint16((stop, 0)),    -- FIN        --21
-      +1,                      -- 1          --22
-      +1,                      -- S(0)       --23
-      +2,                      -- S(1)       --24
-      +5,                      -- comp       --25
-                               -- S(2)       --26
-                               -- S(3)       --27
-                               -- S(4)       --28
-                               -- S(5)       --29
+         ---Boucle { 
+
+      to_uint16((ld,28)),                                      --7
+      to_uint16((sub,31)),                                     --8
+      to_uint16((st,28)),                                      --9
+      to_uint16((brnz,1)),                                     --10
+
+      0, --11
+      0, --12
+      0, --13
+      0, --14
+      0, --15
+      0, --16
+      0, --17
+      0, --18
+      0, --19
+      0, --20
+      0, --21
+      0, --22
+      0, --23
+      0, --24
+      0, --25
+     
+
+      to_uint16((stop, 0 )),                 --27                                   
+      +6,                                    --28   compteur                      
+      32,                                    --29   Adresse de X                    
+      33,                                    --30   Adresse de Y
+      +1,                                    --31   valeur 1
+      +1,                                    --32   s(0)  1
+      +2,                                    --33   s(1)  2
+      0,                                     --34   s(2)  4 
+      0,                                     --35   s(3)  7
+      0,                                     --36   s(4)  12
+      0,                                     --37   s(5)
+   others => 0
    );
    
 end acc_proc_programs;
