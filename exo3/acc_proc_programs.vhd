@@ -9,7 +9,7 @@ package acc_proc_programs is
       to_uint16((ld,   7)),   --  0  ACC = [7] = 2
       to_uint16((br,   3)),   --  1  PC  =  address(3)
       to_uint16((ld,   8)),   --  2  
-      to_uint16((brz,  5)),   --  3  IF (ACC = 0) PC = address (5) 
+      to_uint16((brz,  5)),   --  3  IF (ACC == 0) PC = address (5) 
       to_uint16((add,  9)),   --  4  2 + (-1) = 1  / 1 + (-1) = 0
       to_uint16((brnz, 1)),   --  5  IF (ACC != 0) PC = address(1) 
       to_uint16((stop, 0)),   --  6  Stop ACC = 0
@@ -18,6 +18,7 @@ package acc_proc_programs is
       int16_to_uint16(-1),    --  9
       others => 0
    );
+
 --- dans le program_0, on la valeur 0 dans l'accumulateur
 
    -- Programme utilise pour Q2
